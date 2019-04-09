@@ -1,0 +1,53 @@
+{%extends "base.html" %}
+
+{% load staticfiles %}
+{% block mainbody %}
+<!-- 小说详情 -->
+<section class="container">
+    <div class="media">
+        <div class="pull-left">
+            {% if novel.img %}
+                    <img src="/static/uploads/{{ novel.img.url }}" alt="">
+            {% else %}
+                    <img src="{% static '/dish/default.jpg' %}" alt="">
+            {% endif %}   
+        </div>
+        <div class="media-body text-center">
+            <h2 class="media-heading">{{ novel.name}}</h3>
+            <div style="text-indent: 2em">作者: {{ novel.author }}</div>        
+            <div style="text-indent: 2em" class="text-center">
+                <span>简介: </span>
+                {{ novel.intro }}
+            </div>
+            <div style="text-indent: 2em" class="text-center">
+                <span>发布于: </span>
+                {{ novel.create_time }}
+            </div>            
+            </div>
+       
+            {% if is_collect %}
+                <div class="text-center">
+                    <a href="#" class="btn btn-success">已收藏</a>
+                </div>  
+            {% else %}
+                <div class="text-center">
+                        <a href="{% url 'do_collect' novel.id %}" class="btn btn-primary">收藏</a>
+                </div>                                
+            {% endif %}
+        </div>
+    </div>
+<!-- /小说详情 -->
+    <h3>章节列表</h3>
+<!-- 章节列表  -->
+    <ul class="list-group">
+        {% for chapter in  chapters %}
+        <li class="list-group-item">
+            <a href = "{% url 'chapter_detail' chapter.id %}">{{ forloop.counter }} {{ chapter.name }}</a> 
+            <span class="pull-right">{{ chapter.create_time }}</span>
+        </li>
+        {% empty %}
+            暂未更新
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

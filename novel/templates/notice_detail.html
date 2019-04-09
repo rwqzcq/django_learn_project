@@ -1,0 +1,16 @@
+{%extends "base.html" %}
+
+{% load staticfiles %}
+{% block mainbody %}
+<section>
+    <!-- 标题 -->
+    <div class = "text-center">
+        <h3>{{ notice.title }}</h3><div class="">{{ notice.create_time }}</div>
+    </div>
+    <hr>
+    <!-- 内容 -->
+    <div class = "container">
+        {{ notice.content|safe }}
+    </div>
+</section>
+{% endblock %}

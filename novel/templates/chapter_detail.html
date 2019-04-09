@@ -1,0 +1,26 @@
+{%extends "base.html" %}
+
+{% load staticfiles %}
+{% block mainbody %}
+    <div class = "container">
+        <header>
+            <div class = "text-center">
+                <h3>{{ chapter.name }}</h3><div class="">{{ chapter.create_time }}</div>
+            </div>
+        </header>
+        <hr>
+        <div class="content">
+        {{ chapter.content|safe }}
+        </div>   
+        <footer class = "text-center">
+            <a class = "btn btn-danger" href="{% url 'novel_detail' chapter.novel.id  %}">返回小说详情</a>
+            {% if former_chapter.id__max  %}
+                <a class = "btn btn-primary" href="{% url 'chapter_detail' former_chapter.id__max  %}">上一章</a>
+            {% endif %}
+            {% if next_chapter.id__min %}
+                <a class = "btn btn-primary" href="{% url 'chapter_detail' next_chapter.id__min  %}">下一章</a>
+            {% endif %}        
+        </footer> 
+
+    </div>
+{% endblock %}

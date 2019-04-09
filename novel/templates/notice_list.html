@@ -1,0 +1,17 @@
+{%extends "base.html" %}
+
+{% load staticfiles %}
+{% block mainbody %}
+	<section class = "container">
+		<ul class="list-group">
+            {% for notice in notice_list %}
+            <li class="list-group-item">
+	            {{ forloop.counter }} <a href = "{% url 'notice_detail' notice.id %}">{{ notice.title }}</a><span class="pull-right">{{ notice.adder }}于{{ notice.create_time }}</span>
+	        </li>
+            {% empty %}
+                无公告
+            {% endfor %}
+	        
+    	</ul>
+	</section>
+{% endblock %}

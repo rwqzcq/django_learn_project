@@ -1,0 +1,124 @@
+{%extends "base.html" %}
+
+{% load staticfiles %}
+{% block mainbody %}
+<!-- 幕布 -->
+    <div class="jumbotron container">
+        <div class="container">
+            <h1>小说阅读系统</h1>
+            <p>Python + SqlLite + Pycharm</p>
+        </div>
+    </div>
+    <!-- /幕布 -->
+
+<!-- 幻灯片-->
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="carousel slide" id="carousel-35524">
+                <ol class="carousel-indicators">
+                    <li class="active" data-slide-to="0" data-target="#carousel-35524">
+                    </li>
+                    <li data-slide-to="1" data-target="#carousel-35524">
+                    </li>
+                    <li data-slide-to="2" data-target="#carousel-35524">
+                    </li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img alt="" src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/1600/500/sports/1/default.jpg" />
+                        <div class="carousel-caption">
+                            <h4>
+                                Python
+                            </h4>
+                            <p>
+                               Python是一种计算机程序设计语言。是一种面向对象的动态类型语言，越来越多被用于独立的、大型项目的开发。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img alt="" src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/1600/500/sports/2/default.jpg" />
+                        <div class="carousel-caption">
+                            <h4>
+                                Django
+                            </h4>
+                            <p>
+                                Django是一个开放源代码的Web应用框架，由Python写成。采用了MVC的框架模式，即模型M，视图V和控制器C。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img alt="" src="http://ibootstrap-file.b0.upaiyun.com/lorempixel.com/1600/500/sports/3/default.jpg" />
+                        <div class="carousel-caption">
+                            <h4>
+                                SqlLite
+                            </h4>
+                            <p>
+                                SQLite，是一款轻型的数据库，是遵守ACID的关系型数据库管理系统。
+                            </p>
+                        </div>
+                    </div>
+                </div> <a class="left carousel-control" href="#carousel-35524" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-35524" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /幻灯片-->
+
+
+    <!-- 所有分类 -->
+    <section class = "container">
+         <h3>所有分类</h3>
+         <hr>
+        <ul class="list-inline">
+            {% for all_type in all_types %}
+                <li><a href="{% url 'type_novels_list' all_type.id %}">{{ all_type.type_name }}/ </a></li>
+            {% endfor %}
+        </ul>        
+    </section>
+    <!-- /所有分类 -->
+    <!-- 最新发布 -->
+    <section class="container">
+        <h3>最新发布</h3>
+        <hr>
+        <div class="row">
+        {% for new_novel in new_novels %}
+        
+            <div class="col-lg-3">
+                <a href="{% url 'novel_detail' new_novel.id %}" class="thumbnail">
+                    {% if new_novel.img %}
+                    <img src="/static/uploads/{{ new_novel.img.url }}" alt="">
+                    {% else %}
+                    <img src="{% static '/dish/default.jpg' %}" alt="">
+                    {% endif %}                    
+                </a>
+                <div class="caption text-center">
+                    <h4 class="text-center">{{ new_novel.name }}</h4>
+                    <p class="text-center">{{ new_novel.author }}</p>
+                    <p style="color:red">{{ new_novel.update_time }}</p>
+                    <p class="text-center">
+                        <a href="{% url 'novel_detail' new_novel.id %}" class="btn btn-primary">查看详情</a>
+                    </p>
+                </div>
+            </div>
+                
+        {% endfor %}
+        </div>
+    </section>
+    <!-- /最新发布-->
+    <!-- 最新公告 -->
+    <section class="container">
+        <h3>最新通知</h3>
+        <hr>
+        <ul class="list-group">
+        {% for new_notice in new_notices %}
+            <li class="list-group-item">
+                <a href = "{% url 'notice_detail' new_notice.id %}" >{{ new_notice.title }}</a><span class="pull-right">{{ new_notice.adder }}于{{ new_notice.create_time }}</span>
+            </li>
+        {% empty %}
+            无公告
+        {% endfor %}
+        </ul>
+    </section>
+    <!-- /最新公告 -->
+{% endblock %}
