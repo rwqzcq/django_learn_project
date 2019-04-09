@@ -59,9 +59,10 @@
                         {% endif %}
                     </ul>
                     <!-- 搜索 -->
-                    <form method="get" action="" class="navbar-form navbar-right">
+                    <form method="post" action="{% url 'do_search' %}" class="navbar-form navbar-right">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="搜索小说" name="keyword" /> 
+                            {% csrf_token %}
+                            <input type="text" class="form-control" placeholder="搜索小说" name="name" /> 
                             <input type="submit" class="btn" value="Go" style="margin:0" /> 
                             {% if user.is_authenticated %}
                                 {{ user.username }} |  <a href = "{% url 'logout' %}">退出登录</a>

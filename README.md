@@ -55,6 +55,8 @@ python manage.py migrate
 
 19. 分类
 
+20. 分类查询
+
 
 
 ## 技术攻关
@@ -98,6 +100,12 @@ python manage.py migrate
 
 15. 聚合查询
 - https://www.cnblogs.com/guanfuchang/p/6491162.html
+
+16. 模糊查询
+- https://blog.csdn.net/bigdaddy_maybe/article/details/82591430
+
+17. 控制器中判断是否登录
+- https://www.cnblogs.com/weixuqin/p/9298746.html
 
 
 

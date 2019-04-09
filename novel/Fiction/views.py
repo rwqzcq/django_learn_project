@@ -49,7 +49,9 @@ def novel_detail(request, novel_id):
     # 获取小说的章节
     context['chapters'] = Chapter.objects.filter(novel = novel_id)
     # 查看当前的小说作者是否已经收藏
-    is_collect = Collection.objects.filter(novel = context['novel'], user = request.user)
+    is_collect = False
+    if request.user.is_authenticated == True:
+        is_collect = Collection.objects.filter(novel = context['novel'], user = request.user)
     if is_collect:
         context['is_collect'] = True
     else:
@@ -152,3 +154,12 @@ def collect_list(request):
     context = {}
     context['collections'] = Collection.objects.filter(user = request.user)
     return render(request, 'my_collection.html', context)
+
+# 检索
+def do_search(request):
+    name = request.POST.get('name', '')
+    context = {}
+    context['novelLists'] = Novel.objects.filter(name__contains = name)
+    context['keyword'] = name
+    context['count'] = len(context['novelLists'])
+    return render(request, 'search_list.html', context)

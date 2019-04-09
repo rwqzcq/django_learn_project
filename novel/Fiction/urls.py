@@ -14,5 +14,7 @@ urlpatterns = [
     # 获取公告列表
     path('notice', views.notice_list, name = "notice_list"),
     # 获取公告详情
-    path('noticeDetail/<int:notice_id>', views.notice_detail, name = "notice_detail")
+    path('noticeDetail/<int:notice_id>', views.notice_detail, name = "notice_detail"),
+    # 小说检索
+    path('search', views.do_search, name = "do_search")
 ] 
